@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const errorController=require('./controllers/errorController')
@@ -51,6 +52,9 @@ app.use(hpp({			  // <- Prevent Parameter Polution
 		'difficulty'
 	] 
 }));
+
+app.use(compression());
+
 app.set('view engine', 'pug');
 app.set('views', path.join( __dirname, 'views'));		  
 
@@ -64,9 +68,7 @@ app.use((req, res, next) => { // <- Just a example of Custom Midleware Function
 	//console.log(x);
 	//console.log(req.headers, req.requestTime);
 	console.log(req.requestTime);
-	console.log('cookie start -> ');
 	console.log(req.cookies);
-	console.log('<- cookie over');
 	next();
 });
 

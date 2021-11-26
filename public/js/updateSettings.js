@@ -6,7 +6,7 @@ export const updateSettings = async (data, type) => { // <- type is either data 
 	try {
 		const res = await axios({					// <- 3rd Party library that makes the AJAx calls
 			method: 'PATCH',						// <- Axios also triggers the errors
-			url: `${(type ==='data')? 'http://127.0.0.1:3000/api/v1/users/updateMyData'  : 'http://127.0.0.1:3000/api/v1/users/updateMyPassword' }`,
+			url: `${(type ==='data')? '/api/v1/users/updateMyData'  : '/api/v1/users/updateMyPassword' }`,
 			data
 		});
 		//console.log('RESPONSE FROM SERVER -> ', res);
