@@ -102,3 +102,16 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
 			user: updatedUser
 		})
 });
+exports.getSignupPage = (req, res) => {
+
+	res
+		.status(200)
+		.set(
+			'Content-Security-Policy',
+			`connect-src ${connectSrc}`
+		)
+		.render('signup', {
+			status: 'success',
+			title: 'SIGNUP'
+		});
+}

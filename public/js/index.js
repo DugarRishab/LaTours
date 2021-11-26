@@ -5,10 +5,12 @@ import { displayMap } from './mapbox';
 import { login } from './login';
 import { logout } from './login';
 import { updateSettings } from './updateSettings';
+import { signup } from './signup';
 
 // DOM elements ->>
 const mapBox = document.getElementById('map'); 
 const loginForm = document.querySelector('.form--login');
+const signupForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const updateDataForm = document.querySelector('.form-user-data');
 const updateSettingsForm = document.querySelector('.form-user-settings');
@@ -19,7 +21,10 @@ if (mapBox) {
 	const locations = JSON.parse(mapBox.dataset.locations);
 	displayMap(locations);
 }
+
 if (loginForm) {
+
+	console.log('login form found');
 	loginForm.addEventListener('submit', e => {
 
 		const email = document.getElementById('email').value;
@@ -30,6 +35,26 @@ if (loginForm) {
 	});
 }
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+
+if (signupForm) {
+
+	console.log('signup form found');
+	
+	signupForm.addEventListener('submit', e => {
+		e.preventDefault();	
+
+		const email = document.getElementById('email').value;
+		const password = document.getElementById('password').value;
+		const passwordConfirm = document.getElementById('passwordConfirm').value;
+		const name = document.getElementById('name').value;
+
+		console.log('signupbtn working..');
+
+		signup(name, email, password, passwordConfirm);
+
+	})
+	
+}
 
 if (updateDataForm) {
 	//console.log('btn found');
