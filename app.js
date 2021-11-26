@@ -9,6 +9,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors')
 
 const AppError = require('./utils/appError');
 const errorController=require('./controllers/errorController')
@@ -18,6 +19,17 @@ const reviewRouter = require('./Routes/reviewRoutes');
 const viewRouter = require('./Routes/viewRoutes');
 
 const app = express();
+
+app.enable('trust proxy');
+
+app.use(cors());  // <- sets 'ACCESS_CONTROL_ALLOW_ORIGIN' to all.
+
+// app.use(cors({
+// 	origin: latours.com	// <- Allows only specific websites to use our API
+// }));
+
+app.options('*', cors());	// <- Allows incomming 'DELETE' request on all URL 
+//app.options('/api/v1/tours/:id', cors()); // <- allows incomming 'DELETE' request only on that URL. Browsers send 'OPTIONS' request before 'DELETE' requests to see if it is allowed
 
 app.use(helmet()) // <- Set security HTTP Headers
 
