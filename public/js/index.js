@@ -6,6 +6,7 @@ import { login } from './login';
 import { logout } from './login';
 import { updateSettings } from './updateSettings';
 import { signup } from './signup';
+import { searchTour, getOverview } from './search';
 
 // DOM elements ->>
 const mapBox = document.getElementById('map'); 
@@ -14,14 +15,15 @@ const signupForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const updateDataForm = document.querySelector('.form-user-data');
 const updateSettingsForm = document.querySelector('.form-user-settings');
+const searchForm = document.querySelector('.nav__search');
 // Values ->>
+//const searchValue = document.querySelector('.nav__search-input').value;
 
 // Dedication ->>
 if (mapBox) {
 	const locations = JSON.parse(mapBox.dataset.locations);
 	displayMap(locations);
 }
-
 if (loginForm) {
 
 	console.log('login form found');
@@ -39,7 +41,7 @@ if (logOutBtn) logOutBtn.addEventListener('click', logout);
 if (signupForm) {
 
 	console.log('signup form found');
-	
+
 	signupForm.addEventListener('submit', e => {
 		e.preventDefault();	
 
@@ -55,7 +57,6 @@ if (signupForm) {
 	})
 	
 }
-
 if (updateDataForm) {
 	//console.log('btn found');
 	updateDataForm.addEventListener('submit', e => {
@@ -90,4 +91,16 @@ if (updateSettingsForm) {
 		document.getElementById('password').value= '';
 		document.getElementById('password-confirm').value= '';
 	});
+}
+if (searchForm) {
+	
+	searchForm.addEventListener('submit', e => {
+		e.preventDefault();
+		const searchValue = document.querySelector('.nav__search-input').value;
+
+		if (searchValue) searchTour(searchValue);
+		else getOverview();
+		
+		document.querySelector('.nav__search-input').value = searchValue;
+	})
 }

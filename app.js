@@ -62,7 +62,7 @@ app.use(hpp({			  // <- Prevent Parameter Polution
 		'maxGroupSize',
 		'price',
 		'difficulty'
-	] 
+	]
 }));
 
 app.use(compression());

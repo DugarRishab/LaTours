@@ -2,16 +2,39 @@ const Tour = require('./../models/tourModel');
 const catchAsync = require('./../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+const factory = require('./handlerFactory');
+const APIFeatures = require('./../utils/apiFeatures');
 
 const connectSrc = process.env.CSP_CONNECT_SRC;
 
 exports.getOverview = catchAsync(async (req, res) => {
 
 	// 1) Get tour data from Controller
-	const tours = await Tour.find();
-	// 2) Build template
+	//console.log(req.query);
 
+	const features = new APIFeatures(Tour.find(), req.query)
+		.filter()
+		.sort()
+		.limitFields()
+		.paginate();
+		
+	const tours = await features.query
+	// 2) Build template
+	console.log("tours->>", tours);
 	// 3) Render that template using tour data from 1)
+	if (tours.length===0) {
+		console.log("NO TOURS FOUND");
+		return res
+			.status(404)
+			.set(
+				'Content-Security-Policy',
+				`connect-src ${connectSrc}`
+			)
+			.render('error', {
+				title: 'Nothing Found',
+				message: 'There is no tour with that name'
+			});
+	}
 	res
 		.status(200)
 		.set(
