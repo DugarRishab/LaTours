@@ -20,7 +20,7 @@ exports.getOverview = catchAsync(async (req, res) => {
 		
 	const tours = await features.query
 	// 2) Build template
-	console.log("tours->>", tours);
+	//console.log("tours->>", tours);
 	// 3) Render that template using tour data from 1)
 	if (tours.length===0) {
 		console.log("NO TOURS FOUND");

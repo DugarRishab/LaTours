@@ -1,7 +1,10 @@
+import '@babel/polyfill';
+
 export const searchTour = (searchValue) => {
 
-	const query = searchValue.trim().toLowerCase().replace(/ /g, '-');
+	const query = searchValue.toLowerCase().replace(/ /g, '-');
 	location.assign(`/?slug=${query}`);
+	console.log(query);
 }
 
 export const getOverview = () => {

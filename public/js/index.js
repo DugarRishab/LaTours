@@ -96,7 +96,7 @@ if (searchForm) {
 	
 	searchForm.addEventListener('submit', e => {
 		e.preventDefault();
-		const searchValue = document.querySelector('.nav__search-input').value;
+		const searchValue = document.querySelector('.nav__search-input').value.trim();
 
 		if (searchValue) searchTour(searchValue);
 		else getOverview();
