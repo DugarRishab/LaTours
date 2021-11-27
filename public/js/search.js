@@ -1,6 +1,6 @@
 export const searchTour = (searchValue) => {
 
-	const query = searchValue.toLowerCase().replace(/ /g, '-');
+	const query = searchValue.trim().toLowerCase().replace(/ /g, '-');
 	location.assign(`/?slug=${query}`);
 }
 
