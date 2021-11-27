@@ -59,7 +59,7 @@ const tourSchema = new mongoose.Schema({
 			message: "Difficulty must be either easy or medium or difficult"
 		}
 	},
-	discription: {
+	description: {
 		type: String,
 		trim: true
 	},
